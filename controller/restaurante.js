@@ -57,7 +57,7 @@ exports.getAtendente = (req, res) => {
 };
 
 // Listar todas as mesas que estão sendo ocupadas por um certo cliente
-// Se o param for Lucas e possuir mais de um cliente com esse nome, listará todas as mesas com o cliente Lucas
+// Se o param for Larissa e possuir mais de um cliente com esse nome, listará todas as mesas com a cliente Larissa
 exports.getCliente = (req, res) => {
     if(req.query && req.query.nomeCliente){
         const param = req.query.nomeCliente;

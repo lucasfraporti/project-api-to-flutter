@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', restauranteController.getAll);
 router.get('/:id', restauranteController.getMesaById);
-router.get('/mesa/:id', restauranteController.getMesaByNumber);
+router.get('/mesa/:numberMesa', restauranteController.getMesaByNumber);
 router.get('/atendente/search', restauranteController.getAtendente);
 router.get('/cliente/search', restauranteController.getCliente);
 router.get('/limpeza/search', restauranteController.getLimpeza);
