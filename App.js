@@ -20,7 +20,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/app_restaurante')
 
 App.use(middleware.trataLog);
 App.use('/api/login', routeLogin);
-App.use(middleware.validaToken);
+// App.use(middleware.validaToken);
 App.use('/api/restaurante', routeRestaurante);
 App.use('/api/users', routeUser);
 
