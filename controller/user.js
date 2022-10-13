@@ -97,19 +97,19 @@ exports.attUser = (req, res) => {
     });
 };
 
-exports.recoverPassword = (req, res) => {
-    const userRequest = req.body;
-    if(!userRequest || !userRequest.name || !userRequest.username){
-        return res.status(400).json({error: 'Você deverá informar o seu nome e o usuário para recuperação da senha'});
+exports.changePassword = (req, res) => {
+    const id = req.params.id;
+    const new_password = bcrypt.hashSync(req.body.new_password, 10);
+
+    if(!userRequest.password || !new_password){
+        return res.status(400).json({error: 'Você deverá informar a senha atual e digitar uma nova senha'});
     };
-    User.findOne({name: userRequest.name, username: userRequest.username}, (err, userEncontrado) => {
+    User.updateOne({_id: id}, {$set:{"password": new_password}}, (err, result) => {
         if(err){
             res.status(500).send(err);
-        }else if(userEncontrado){
-            return res.json({senhaAtualEncryptada: userEncontrado.password});
         }else{
-            return res.status(404).json({message: 'Nenhum usuário encontrado com as especificações informadas'});
-        }
+            res.status(200).json(result);
+        };
     });
 };
 
