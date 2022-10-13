@@ -4,9 +4,9 @@ const Restaurante = require('../model/restaurante');
 exports.getAll = (req, res) => {
     Restaurante.find({}, (err, result) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else{
-            res.json(result);
+            return res.json(result);
         };
     });
 };
@@ -16,7 +16,7 @@ exports.getMesaById = (req, res) => {
     const id = req.params.id;
     Restaurante.findById(id, (err, result) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(result){
             return res.json(result);
         }else{
@@ -30,7 +30,7 @@ exports.getMesaByNumber = (req, res) => {
     const number = req.params.numberMesa;
     Restaurante.find({numberMesa: number}, (err, result) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(result){
             return res.json(result);
         }else{
@@ -46,7 +46,7 @@ exports.getAtendente = (req, res) => {
         const param = req.query.nomeAtendente;
         Restaurante.find({nomeAtendente: {$regex: param}}, (err, result) => {
             if(err){
-                res.status(500).send(err);
+                return res.status(500).send(err);
             }else if(result){
                 return res.json(result);
             }else{
@@ -63,7 +63,7 @@ exports.getCliente = (req, res) => {
         const param = req.query.nomeCliente;
         Restaurante.find({nomeCliente: {$regex: param}}, (err, result) => {
             if(err){
-                res.status(500).send(err);
+                return res.status(500).send(err);
             }else if(result){
                 return res.json(result);
             }else{
@@ -79,7 +79,7 @@ exports.getLimpeza = (req, res) => {
         const param = req.query.mesaLimpa;
         Restaurante.find({mesaLimpa: param}, (err, result) => {
             if(err){
-                res.status(500).send(err);
+                return res.status(500).send(err);
             }else if(result){
                 return res.json(result);
             }else{
@@ -95,7 +95,7 @@ exports.getStatus = (req, res) => {
         const param = req.query.mesaOcupada;
         Restaurante.find({mesaOcupada: param}, (err, result) => {
             if(err){
-                res.status(500).send(err);
+                return res.status(500).send(err);
             }else if(result){
                 return res.json(result);
             }else{
@@ -109,7 +109,7 @@ exports.getStatus = (req, res) => {
 exports.getAvailability = (req, res) => {
     Restaurante.count({mesaOcupada: 0, mesaLimpa: 1}, (err, result) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(result){
             return res.json(result);
         }else{
@@ -127,7 +127,7 @@ exports.attMesa = (req, res) => {
     };
     Restaurante.findByIdAndUpdate(id, mesaRequest, {new: true}, (err, result) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(result){
             return res.json(result);
         }else{
@@ -143,9 +143,9 @@ exports.postMesa = (req, res) => {
         const mesaNova = new Restaurante(mesaRequest);
         mesaNova.save((err, result) => {
             if(err){
-                res.status(500).send(err);
+                returnres.status(500).send(err);
             }else{
-                res.json(result);
+                return res.json(result);
             };
         });
     }else{
