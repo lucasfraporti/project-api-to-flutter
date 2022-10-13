@@ -11,9 +11,9 @@ exports.validarUser = (req, res) => {
                 return res.status(500).json({error: err});
             }else if(userEncontrado && bcrypt.compareSync(passwordUser, userEncontrado.password)){
                 const token = jwt.sign({id: userEncontrado.id}, 'Sen@c-RS', {expiresIn: '1h'});
-                res.status(201).json({token: token});
+                return res.status(201).json({token: token});
             }else{
-                res.status(401).json({error: "Usuário não encontrado"});
+                return res.status(401).json({error: "Usuário não encontrado"});
             };
         });
     };
@@ -24,7 +24,7 @@ exports.listarUsers = (req, res) => {
         if(err){
             return res.status(500).json({error: err});
         }else{
-            res.status(200).json(users);
+            return res.status(200).json(users);
         };
     });
 };
@@ -33,7 +33,7 @@ exports.listarUsersById = (req, res) => {
     const id = req.params.id;
     User.findById(id, (err, userEncontrado) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(userEncontrado){
             return res.status(200).json(userEncontrado);
         }else{
@@ -47,7 +47,7 @@ exports.buscarUser = (req, res) => {
         const param = req.query.username;
         User.findOne({username: param}, (err, userEncontrado) => {
             if(err){
-                res.status(500).send(err);
+                return res.status(500).send(err);
             }else if(userEncontrado){
                 return res.json(userEncontrado);
             }else{
@@ -67,7 +67,7 @@ exports.postUser = (req, res) => {
         userNovo.password = bcrypt.hashSync(userRequest.password, 10);
         userNovo.save((err, userSalvo) => {
             if(err){
-                res.status(500).send(err);
+                return res.status(500).send(err);
             }else{
                 return res.status(201).json(userSalvo);
             };
@@ -88,11 +88,11 @@ exports.attUser = (req, res) => {
     };
     User.findByIdAndUpdate(id, userRequest, {new: true}, (err, userAtualizado) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(userAtualizado){
-            res.status(200).json(userAtualizado);
+            return res.status(200).json(userAtualizado);
         }else{
-            res.status(404).json({error: 'Usuário não encontrado'});
+            return res.status(404).json({error: 'Usuário não encontrado'});
         };
     });
 };
@@ -106,9 +106,9 @@ exports.changePassword = (req, res) => {
     };
     User.updateOne({_id: id}, {$set:{"password": new_password}}, (err, result) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else{
-            res.status(200).json(result);
+            return res.status(200).json(result);
         };
     });
 };
@@ -117,7 +117,7 @@ exports.deleteUser = (req, res) => {
     const id = req.params.id;
     User.findByIdAndDelete(id, (err, userEncontrado) => {
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }else if(userEncontrado){
             return res.status(200).json(userEncontrado);
         }else{
