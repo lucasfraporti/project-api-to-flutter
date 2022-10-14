@@ -99,6 +99,7 @@ exports.attUser = (req, res) => {
 
 exports.changePassword = (req, res) => {
     const id = req.params.id;
+    const userRequest = req.body;
     const new_password = bcrypt.hashSync(req.body.new_password, 10);
 
     if(!userRequest.password || !new_password){
