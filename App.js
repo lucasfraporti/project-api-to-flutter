@@ -24,7 +24,7 @@ mongoose.connect(`mongodb://iad2-c11-0.mongo.objectrocket.com:54996?ssl=true`)
 
 App.use(middleware.trataLog);
 App.use('/api/login', routeLogin);
-App.use(middleware.validaToken);
+//App.use(middleware.validaToken);
 App.use('/api/restaurante', routeRestaurante);
 App.use('/api/users', routeUser);
 
