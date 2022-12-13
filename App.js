@@ -15,7 +15,7 @@ dotenv.config();
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(`mongodb://iad2-c11-0.mongo.objectrocket.com:54996?ssl=true`)
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${process.env.CLUSTER}/?retryWrites=true&w=majority`)
 .then(() => {
     console.log('Conectado ao MongoDB com sucesso');
 }).catch((error) => {
