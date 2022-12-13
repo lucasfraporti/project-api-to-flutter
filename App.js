@@ -24,7 +24,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}${p
 
 App.use(middleware.trataLog);
 App.use('/api/login', routeLogin);
-//App.use(middleware.validaToken);
+App.use(middleware.validaToken);
 App.use('/api/restaurante', routeRestaurante);
 App.use('/api/users', routeUser);
 
