@@ -24,7 +24,7 @@ mongoose.connect(`mongodb+srv://larissabernardon:passwordpassword123@cluster0.ma
 
 App.use(middleware.trataLog);
 App.use('/api/login', routeLogin);
-App.use(middleware.validaToken);
+//App.use(middleware.validaToken);
 App.use('/api/restaurante', routeRestaurante);
 App.use('/api/users', routeUser);
 
